@@ -1,0 +1,22 @@
+    class_end_time=classtime[classtime.rfind('-')+1:]
+    teacher=data.loc[4,1]
+    manager=data.loc[5,1]
+    data1row=data.loc[data[0]=='学生姓名'].index.tolist()[0]
+    data1=data.loc[data1row:].reset_index(drop=True)
+    #print(data1)
+    class_cost_info_one_class=[]
+    for c in range(2,data1.shape[1]):
+        if type(data1.loc[0,c])==np.float64:
+            classdate=""
+        else:
+            classdate=data1.loc[0,c].strftime("%Y-%m-%d")
+        for r in range(1,data1.shape[0]):
+            stuname=data1.loc[r,1]
+            if data1.loc[r,c]==1:
+                class_cost=1
+                class_cost_info_one_row=[classdate,classname,classtype,subject,grade,class_start_time,class_end_time,teacher,manager,stuname,class_cost]
+                #print(class_cost_info_one_row)
+                class_cost_info_one_class.append(class_cost_info_one_row)
+            
+    #print(class_cost_info_one_class)
+    return class_cost_info_one_class
